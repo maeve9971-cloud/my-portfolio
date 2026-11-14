@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal portfolio of Your Name — a developer who enjoys building useful things for the web.">
+  <title>Your Name | Developer Portfolio</title>
+  <style>
+    :root {
+      --navy: #0b1224;
+      --navy-soft: #111c33;
+      --panel: #14213b;
+      --orange: #ff8a3d;
+      --orange-light: #ffad73;
+      --text: #f4f6fb;
+      --muted: #aab5c8;
+      --line: rgba(255,255,255,.11);
+      --max-width: 1080px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      margin: 0;
+      background: var(--navy);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .container { width: min(var(--max-width), calc(100% - 40px)); margin-inline: auto; }
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(11,18,36,.9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-wrap { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: -.04em; }
+    .logo span { color: var(--orange); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { color: var(--muted); font-size: .94rem; transition: color .2s; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--orange-light); }
+    .menu-toggle {
+      display: none; border: 1px solid var(--line); background: var(--panel); color: var(--text);
+      border-radius: 10px; padding: 8px 11px; cursor: pointer;
+    }
+    .hero { padding: 104px 0 92px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.35fr .65fr; align-items: center; gap: 56px; }
+    .eyebrow { color: var(--orange-light); text-transform: uppercase; letter-spacing: .16em; font-size: .76rem; font-weight: 800; }
+    h1 { font-size: clamp(2.7rem, 6vw, 5rem); line-height: 1.06; letter-spacing: -.065em; margin: 16px 0 20px; }
+    h1 .accent { color: var(--orange); }
+    .hero-copy { max-width: 620px; color: var(--muted); font-size: 1.1rem; margin: 0 0 30px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+    .btn { display: inline-flex; justify-content: center; align-items: center; padding: 12px 20px; border-radius: 9px; font-weight: 750; transition: transform .2s, background .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--orange); color: #1b1720; }
+    .btn-primary:hover { background: var(--orange-light); }
+    .btn-outline { border: 1px solid var(--line); color: var(--text); }
+    .hero-art {
+      min-height: 300px; display: grid; place-items: center; position: relative;
+    }
+    .orbit { width: min(290px, 70vw); aspect-ratio: 1; border: 1px solid rgba(255,138,61,.35); border-radius: 50%; display: grid; place-items: center; position: relative; }
+    .orbit::before, .orbit::after { content: ""; position: absolute; border: 1px solid rgba(255,255,255,.09); border-radius: 50%; }
+    .orbit::before { inset: 22px; }
+    .orbit::after { inset: 48px; }
+    .avatar-mark { width: 142px; height: 142px; display: grid; place-items: center; border-radius: 36px; transform: rotate(-8deg); background: linear-gradient(145deg, #ffad73, #ff7432); color: #201525; font-size: 3rem; font-weight: 900; box-shadow: 0 24px 70px rgba(255,138,61,.22); }
+    .orbit-dot { position: absolute; width: 13px; height: 13px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 22px var(--orange); }
+    .dot-one { top: 24px; right: 48px; } .dot-two { bottom: 44px; left: 15px; width: 9px; height: 9px; }
+    section { padding: 84px 0; border-top: 1px solid var(--line); }
+    .section-heading { margin-bottom: 34px; }
+    .section-heading h2 { font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -.045em; line-height: 1.15; margin: 8px 0 10px; }
+    .section-heading p { color: var(--muted); margin: 0; max-width: 620px; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 46px; align-items: start; }
+    .about-text { color: var(--muted); margin: 0; }
+    .quick-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .fact { padding: 18px; background: var(--navy-soft); border: 1px solid var(--line); border-radius: 13px; }
+    .fact strong { display: block; color: var(--orange-light); font-size: 1.35rem; }
+    .fact span { color: var(--muted); font-size: .88rem; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 12px; }
+    .skill { padding: 10px 15px; border: 1px solid rgba(255,138,61,.28); background: rgba(255,138,61,.07); color: #ffd0b1; border-radius: 999px; font-size: .92rem; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card { background: var(--navy-soft); border: 1px solid var(--line); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; min-height: 270px; transition: transform .2s, border-color .2s; }
+    .project-card:hover { transform: translateY(-5px); border-color: rgba(255,138,61,.55); }
+    .project-number { color: var(--orange); font-weight: 850; font-size: .82rem; letter-spacing: .12em; }
+    .project-card h3 { font-size: 1.25rem; margin: 18px 0 8px; }
+    .project-card p { color: var(--muted); font-size: .94rem; margin: 0 0 22px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+    .project-tags span { font-size: .75rem; color: var(--orange-light); background: rgba(255,138,61,.1); padding: 4px 9px; border-radius: 6px; }
+    .contact-panel { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 34px; background: linear-gradient(120deg, #172744, #111b31); border: 1px solid var(--line); border-radius: 18px; }
+    .contact-panel h3 { margin: 0 0 8px; font-size: 1.55rem; }
+    .contact-panel p { color: var(--muted); margin: 0; }
+    footer { padding: 26px 0; color: var(--muted); font-size: .86rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    :focus-visible { outline: 3px solid var(--orange-light); outline-offset: 3px; }
+    @media (max-width: 760px) {
+      .menu-toggle { display: inline-flex; }
+      .nav-links {
+        display: none; position: absolute; top: 72px; left: 0; right: 0; padding: 18px 22px 22px;
+        background: #101a30; border-bottom: 1px solid var(--line); flex-direction: column; align-items: flex-start; gap: 16px;
+      }
+      .nav-links.open { display: flex; }
+      .hero { padding: 76px 0 66px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+      .hero-art { min-height: 240px; }
+      .orbit { width: 225px; }
+      .avatar-mark { width: 112px; height: 112px; font-size: 2.4rem; }
+      section { padding: 66px 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 26px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card { min-height: 220px; }
+      .contact-panel { align-items: flex-start; flex-direction: column; padding: 26px; }
+    }
+    @media (max-width: 420px) {
+      .container { width: min(100% - 30px, var(--max-width)); }
+      .quick-facts { grid-template-columns: 1fr 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav-wrap" aria-label="Main navigation">
+      <a class="logo" href="#home">YOUR<span>NAME.</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation menu">☰ Menu</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home" style="border-top:0">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Hello, world! I'm</div>
+          <h1>Your Name<br><span class="accent">Web Developer.</span></h1>
+          <p class="hero-copy">I’m a curious beginner developer who enjoys turning ideas into clean, useful, and accessible web experiences. I’m learning, building, and improving one project at a time.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#projects">Explore my work</a>
+            <a class="btn btn-outline" href="#contact">Get in touch</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit"><span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span><div class="avatar-mark">&lt;/&gt;</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading"><div class="eyebrow">A little about me</div><h2>Building my path on the web.</h2></div>
+        <div class="about-grid">
+          <p class="about-text">I’m an aspiring web developer with a foundation in HTML and CSS and a growing interest in creating responsive websites. I enjoy solving small design challenges, learning new techniques, and making the web easier to use. I’m currently looking for opportunities to practise, collaborate, and grow as a developer.</p>
+          <div class="quick-facts">
+            <div class="fact"><strong>HTML</strong><span>Page structure</span></div>
+            <div class="fact"><strong>CSS</strong><span>Layout & styling</span></div>
+            <div class="fact"><strong>Curious</strong><span>Always learning</span></div>
+            <div class="fact"><strong>Open</strong><span>To collaboration</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading"><div class="eyebrow">What I work with</div><h2>My skills.</h2><p>A snapshot of the tools and concepts I’m learning and practising.</p></div>
+        <div class="skill-list">
+          <span class="skill">HTML5</span><span class="skill">CSS3</span><span class="skill">Responsive Design</span>
+          <span class="skill">Flexbox</span><span class="skill">CSS Grid</span><span class="skill">Git & GitHub</span>
+          <span class="skill">Accessibility Basics</span><span class="skill">JavaScript (Learning)</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading"><div class="eyebrow">Selected work</div><h2>Projects I’m proud of.</h2><p>Replace these examples with projects you have built. Add a link to each live demo or source-code repository.</p></div>
+        <div class="projects-grid">
+          <article class="project-card">
+            <span class="project-number">PROJECT 01</span><h3>Personal Landing Page</h3>
+            <p>A simple, responsive landing page introducing a person, their interests, and ways to connect.</p>
+            <div class="project-tags"><span>HTML</span><span>CSS</span><span>Flexbox</span></div>
+          </article>
+          <article class="project-card">
+            <span class="project-number">PROJECT 02</span><h3>Recipe Collection</h3>
+            <p>A tidy collection of favourite recipes with readable typography and a mobile-friendly layout.</p>
+            <div class="project-tags"><span>HTML</span><span>CSS Grid</span><span>Responsive</span></div>
+          </article>
+          <article class="project-card">
+            <span class="project-number">PROJECT 03</span><h3>Product Card UI</h3>
+            <p>A product showcase card exploring spacing, colour, buttons, and clear visual hierarchy.</p>
+            <div class="project-tags"><span>HTML</span><span>CSS</span><span>UI Design</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-heading"><div class="eyebrow">Let's connect</div><h2>Have a project in mind?</h2></div>
+        <div class="contact-panel">
+          <div><h3>I’d love to hear from you.</h3><p>For collaborations, feedback, or opportunities, send me an email.</p></div>
+          <!-- Replace the email address below with your own. -->
+          <a class="btn btn-primary" href="mailto:hello@example.com">Email me ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner"><span>© <span id="year"></span> Your Name. Built with HTML & CSS.</span><a href="#home">Back to top ↑</a></div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      menuButton.textContent = isOpen ? "✕ Close" : "☰ Menu";
+    });
+
+    // Close the mobile menu after a navigation link is selected.
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "Open navigation menu");
+        menuButton.textContent = "☰ Menu";
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
